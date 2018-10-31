@@ -7,6 +7,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,10 +19,11 @@ import android.widget.EditText;
 import com.example.rus.tfproject.network.AuthEndpoint;
 import com.example.rus.tfproject.network.DTO.User;
 import com.example.rus.tfproject.network.TFApi;
+import com.example.rus.tfproject.ui.MainActivity;
 
 import java.util.HashSet;
 
-public class MainActivity extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity {
     EditText emailEditText, passwordEditText;
     Button loginButton;
 
@@ -29,7 +31,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        checkIfLogin();
+
         init();
+    }
+
+    private void checkIfLogin() {
+        if(!PreferenceManager.getDefaultSharedPreferences(this).getStringSet("cookies", new HashSet<String>()).isEmpty()){
+            Intent intent = MainActivity.newIntent(this);
+            startActivity(intent);
+        }
     }
 
     private void init() {
