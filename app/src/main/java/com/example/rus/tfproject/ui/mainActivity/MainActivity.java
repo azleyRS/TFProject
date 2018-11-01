@@ -122,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupBottomNavigationView() {
         bottomNavigationView.setSelectedItemId(R.id.action_profile);
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_activity_fragment_container, ProfileFragment.newInstance()).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.main_activity_fragment_container, ProfileFragment.newInstance()).commit();
 
-        //loadFragmentByTag(TAG_FRAGMENT_MY_COURSE);
+        loadFragmentByTag(TAG_FRAGMENT_PROFILE);
     }
 
     private void findViews() {
