@@ -32,16 +32,19 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        checkIfLogin();
+        //checkIfLogin();
 
         init();
     }
 
     private void checkIfLogin() {
+        //change this later using    api/user
         if(!PreferenceManager.getDefaultSharedPreferences(this).getStringSet("cookies", new HashSet<String>()).isEmpty()){
             Intent intent = MainActivity.newIntent(this);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
+
     }
 
     private void init() {
@@ -73,6 +76,7 @@ public class AuthActivity extends AppCompatActivity {
                     public void onNext(User user) {
                         HashSet<String> set = (HashSet<String>) PreferenceManager.getDefaultSharedPreferences(context).getStringSet("cookies", new HashSet<String>());
                         Log.v("TEST", set.toString());
+                        checkIfLogin();
                     }
 
                     @Override

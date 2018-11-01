@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TFProject</string>
+    <string name="events">Мероприятия</string>
+    <string name="my_course">Мой курс</string>
+    <string name="profile">Профиль</string>
+    <string name="settings">Настройки</string>
 </resources>
