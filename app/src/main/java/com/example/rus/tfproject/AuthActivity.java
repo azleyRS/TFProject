@@ -8,7 +8,6 @@ import io.reactivex.schedulers.Schedulers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -19,7 +18,7 @@ import android.widget.EditText;
 import com.example.rus.tfproject.network.AuthEndpoint;
 import com.example.rus.tfproject.network.DTO.User;
 import com.example.rus.tfproject.network.TFApi;
-import com.example.rus.tfproject.ui.MainActivity;
+import com.example.rus.tfproject.ui.mainActivity.MainActivity;
 
 import java.util.HashSet;
 
@@ -32,7 +31,7 @@ public class AuthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //checkIfLogin();
+        checkIfLogin();
 
         init();
     }
