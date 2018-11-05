@@ -23,8 +23,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rus.tfproject.R;
+import com.example.rus.tfproject.network.DTO.DetailedTask;
 import com.example.rus.tfproject.network.DTO.HomeWorks;
 import com.example.rus.tfproject.network.DTO.Homework;
+import com.example.rus.tfproject.network.DTO.Task;
 import com.example.rus.tfproject.network.TFApi;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import java.util.List;
 public class MyCourseFragment extends Fragment {
     RecyclerView recyclerView;
     List<String> testListGlobal = new ArrayList<>();
+    List<DetailedTask> detailedTaskList = new ArrayList<>();
 
     public static MyCourseFragment newInstance() {
         Log.v("tag", "MyCourse created");
@@ -51,17 +54,20 @@ public class MyCourseFragment extends Fragment {
         initViews(view);
     }
 
-    private void initViews(View view) {
+    private void initViews(View view)  {
 
         recyclerView = view.findViewById(R.id.my_course_fragment_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        List<String> testList = new ArrayList<>();
+
+        //List<String> testList = new ArrayList<>();
+/*
         for (int i = 0; i < 100; i++){
             testList.add("Number " + i);
-        }
-        CourseAdapter adapter = new CourseAdapter(testList);
+        }*/
+
+        CourseAdapter adapter = new CourseAdapter(detailedTaskList, getContext());
         recyclerView.setAdapter(adapter);
 
         if (testListGlobal.isEmpty()) {
@@ -78,13 +84,21 @@ public class MyCourseFragment extends Fragment {
                         @Override
                         public void onSuccess(HomeWorks homeWorks) {
                             List<Homework> homeworkList = homeWorks.homeworks;
-                            List<String> testList2 = new ArrayList<>();
-                            for (Homework homework : homeworkList) {
-                                testList2.add(homework.title);
+                            List<DetailedTask> testList2 = new ArrayList<>();
+
+                            for (Homework homework : homeworkList){
+                                List<Task> taskList = homework.tasks;
+                                for (Task task : taskList){
+                                    if (task.task.taskType.equals("test_during_lecture")){
+                                        testList2.add(task.task);
+                                    }
+                                }
                             }
+
                             adapter.setNewList(testList2);
 
-                            testListGlobal = testList2;
+                            //testListGlobal = testList2;
+                            detailedTaskList = testList2;
                         }
 
                         @Override
@@ -95,7 +109,7 @@ public class MyCourseFragment extends Fragment {
                     });
 
         } else {
-            adapter.setNewList(testListGlobal);
+            adapter.setNewList(detailedTaskList);
         }
 
         /*
