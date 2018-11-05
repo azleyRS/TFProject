@@ -14,6 +14,7 @@ public class TFApi {
 
     private static TFApi tfApi;
     private final AuthEndpoint authEndpoint;
+    private final HomeworksEndpoint homeworksEndpoint;
 
     public static synchronized TFApi getInstance(){
         if (tfApi == null){
@@ -27,6 +28,7 @@ public class TFApi {
         final Retrofit retrofit = buildRetrofitClient(httpClient);
 
         authEndpoint = retrofit.create(AuthEndpoint.class);
+        homeworksEndpoint = retrofit.create(HomeworksEndpoint.class);
     }
 
     private Retrofit buildRetrofitClient(OkHttpClient client) {
@@ -50,5 +52,9 @@ public class TFApi {
 
     public AuthEndpoint getAuthEndpoint() {
         return authEndpoint;
+    }
+
+    public HomeworksEndpoint getHomeworksEndpoint() {
+        return homeworksEndpoint;
     }
 }

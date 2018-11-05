@@ -18,7 +18,6 @@ import com.example.rus.tfproject.ui.mainActivity.fragments.settings.SettingsFrag
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
     private static final String TAG_FRAGMENT_MY_COURSE = "fragment_my_course";
     private static final String TAG_FRAGMENT_PROFILE = "fragment_profile";
     private static final String TAG_FRAGMENT_SETTINGS = "fragment_settings";
@@ -41,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         initViews();
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     private void initViews() {
 
         fragmentManager = getSupportFragmentManager();
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners() {
-        /*bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+ /*       bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             Fragment fragment = null;
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
+        // not working as intended but works with addToBackStack
        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
            @Override
            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -109,16 +114,17 @@ public class MainActivity extends AppCompatActivity {
             Log.v("TAG", "Tag found");
         }
         if (currentFragment == null){
-            fragmentManager.beginTransaction().replace(R.id.main_activity_fragment_container, fragment, tagFragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.main_activity_fragment_container, fragment, tagFragment)
+                    .addToBackStack(null).commit();
             currentFragment = fragment;
         } else {
             if (!currentFragment.equals(fragment)){
-                fragmentManager.beginTransaction().replace(R.id.main_activity_fragment_container, fragment, tagFragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.main_activity_fragment_container, fragment, tagFragment)
+                        .addToBackStack(null).commit();
                 currentFragment = fragment;
             }
         }
     }
-
 
     private void setupBottomNavigationView() {
         bottomNavigationView.setSelectedItemId(R.id.action_profile);

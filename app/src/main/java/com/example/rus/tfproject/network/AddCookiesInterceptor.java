@@ -2,6 +2,7 @@ package com.example.rus.tfproject.network;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.example.rus.tfproject.MyApplication;
 
@@ -18,10 +19,18 @@ class AddCookiesInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        HashSet<String> pref = getCookies();
-        for (String cookie: pref){
-            builder.addHeader("Cookie", cookie);
+
+        //testing
+        if (MyApplication.isCookies() == true){
+            HashSet<String> pref = getCookies();
+            Log.v("Cookies", pref.toString());
+            for (String cookie: pref){
+                //testing
+                builder.addHeader("cookie", cookie);
+            }
         }
+
+
         return chain.proceed(builder.build());
     }
 
