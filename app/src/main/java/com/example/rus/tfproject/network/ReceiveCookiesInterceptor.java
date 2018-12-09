@@ -22,9 +22,10 @@ class ReceiveCookiesInterceptor implements Interceptor {
             HashSet<String> cookies = new HashSet<>();
 
             for (String cookieHeader : response.headers("Set-Cookie")) {
-                if (cookieHeader.contains("anygen")){
+                /*if (cookieHeader.contains("anygen")){
                     cookies.add(cookieHeader);
-                }
+                }*/
+                cookies.add(cookieHeader);
             }
 
             //for a time

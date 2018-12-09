@@ -26,8 +26,14 @@ class AddCookiesInterceptor implements Interceptor {
             Log.v("Cookies", pref.toString());
             for (String cookie: pref){
                 //testing
-                builder.addHeader("cookie", cookie);
+                if (cookie.contains("anygen")){
+                    builder.addHeader("cookie", cookie);
+                }
+                if (cookie.contains("csrf")){
+                    builder.addHeader("X-CSRF-Token", cookie);
+                }
             }
+            builder.addHeader("Referer", "https://fintech.tinkoff.ru/");
         }
 
 

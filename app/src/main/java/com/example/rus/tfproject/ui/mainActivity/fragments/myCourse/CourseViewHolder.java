@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 class CourseViewHolder extends RecyclerView.ViewHolder {
-    TextView textView;
+    TextView testTitle, testStatus;
     private DetailedTask tast;
     private Context context;
 
@@ -24,14 +24,16 @@ class CourseViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(DetailedTask task){
-        textView.setText(task.title);
+        testTitle.setText(task.title);
+        testStatus.setText(task.contestInfo.contestStatus.status);
         this.tast = task;
     }
 
     public CourseViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         this.context = context;
-        textView = itemView.findViewById(R.id.my_course_fragment_recycler_view_text_view);
+        testTitle = itemView.findViewById(R.id.my_course_fragment_recycler_view_text_view);
+        testStatus = itemView.findViewById(R.id.test_status_text_view);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

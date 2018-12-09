@@ -1,6 +1,7 @@
 package com.example.rus.tfproject.network;
 
 import com.example.rus.tfproject.network.DTO.User;
+import com.example.rus.tfproject.network.DTO.UserOuterResponce;
 import com.example.rus.tfproject.network.DTO.WrapperResponce;
 
 import io.reactivex.Observable;
@@ -29,6 +30,9 @@ public interface AuthEndpoint {
 
     @GET("user")
     Single<ResponseBody> checkAuthResponceBody();
+
+    @GET("user")
+    Single<UserOuterResponce> getUserInfo();
 
     @GET("user")
     Single<Response<Object>> checkAuthRxWithMultypleResponces();

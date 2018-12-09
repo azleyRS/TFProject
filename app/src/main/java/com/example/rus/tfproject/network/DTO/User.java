@@ -54,5 +54,5 @@ public class User {
     @SerializedName("admin")
     public Boolean admin;
     @SerializedName("avatar")
-    public Object avatar;
+    public String avatar;
 }
